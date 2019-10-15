@@ -6,10 +6,7 @@ const config = {
     databaseURL: "https://gerenciador-de-obras.firebaseio.com",
     projectId: "gerenciador-de-obras",
     storageBucket: "gerenciador-de-obras.appspot.com",
-    messagingSenderId: "546276955156",
-    appId: "1:546276955156:web:371139cec73a3a770ec301",
-    measurementId: "G-W1B3CM7XBG"
+    messagingSenderId: "546276955156"
   };
- const fire = firebase.initializeApp(config);
- 
- export default fire;
+ const Fire = firebase.initializeApp(config);
+ export default Fire;
