@@ -1,57 +1,81 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import Fire from './config/Fire';
+import React, {Component} from 'react';
+import fire from '../config/Fire';
 
 class SignInForm extends Component {
-    constructor() {
-        super();
-
+    constructor(props){
+        super(props);
         this.state = {
             email: '',
-            password: ''
-        };
-
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+            password: '',
+            fireErrors: '',
+            formTitle: 'Login',
+            loginBtn: true
+        }
     }
 
-    handleChange(e) {
-        let target = e.target;
-        let value = target.type === 'checkbox' ? target.checked : target.value;
-        let name = target.name;
-
-        this.setState({
-          [name]: value
+    login = e => {
+        e.preventDefault();
+        fire.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
+        .catch((error) => {
+            this.setState({fireErrors: error.message})
         });
     }
 
-    handleSubmit(e) {
+    register = e => {
         e.preventDefault();
-
-        console.log('The form was submitted with the following data:');
-        console.log(this.state);
+        fire.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
+        .catch((error) => {
+            this.setState({fireErrors: error.message})
+        });
     }
 
-    render() {
-        return (
-        <div className="FormCenter">
-            <form onSubmit={this.handleSubmit} className="FormFields" onSubmit={this.handleSubmit}>
-            <div className="FormField">
-                <label className="FormField__Label" htmlFor="email">E-Mail</label>
-                <input type="email" id="email" className="FormField__Input" placeholder="Digite seu email" name="email" value={this.state.email} onChange={this.handleChange} />
-              </div>
+    getAction = action => {
+        if(action === 'reg'){
+            this.setState({formTitle: 'Register New User', loginBtn: false, fireErrors: ''});
+        }else{
+            this.setState({formTitle: 'Login', loginBtn: true, fireErrors: ''});
+        }
+    }
 
-              <div className="FormField">
-                <label className="FormField__Label" htmlFor="password">Senha</label>
-                <input type="password" id="password" className="FormField__Input" placeholder="Digite sua senha" name="password" value={this.state.password} onChange={this.handleChange} />
-              </div>
+    handleChange = e => {
+        this.setState({[e.target.name]: e.target.value});
+    }
 
-              <div className="FormField">
-                  <button className="FormField__Button mr-20">Entrar</button> <Link to="/" className="FormField__Link">Criar uma conta</Link>
-              </div>
-            </form>
-          </div>
-        );
+    render(){
+
+        let errorNotification = this.state.fireErrors ? 
+            ( <div className="Error"> {this.state.fireErrors} </div> ) : null;
+
+        let submitBtn = this.state.loginBtn ? 
+            (<input className="loginBtn" type="submit" onClick={this.login} value="Enter" />) : 
+            (<input className="loginBtn" type="submit" onClick={this.register} value="Register" />);
+
+        let login_register = this.state.loginBtn ?
+            (<button className="registerBtn" onClick={() => this.getAction('reg')}>Register</button>) : 
+            (<button className="registerBtn" onClick={() => this.getAction('login')}>Login</button>)
+
+        return(
+            <div className="form_block">
+                <div id="title">{this.state.formTitle}</div>
+                <div className="body">
+                    {errorNotification}
+                    <form>
+                        <input type="text" 
+                        value={this.state.email} 
+                        onChange={this.handleChange} 
+                        name="email" />
+
+                        <input type="password" 
+                        value={this.state.password} 
+                        onChange={this.handleChange} 
+                        name="password" />
+
+                        {submitBtn}
+                    </form>
+                    {login_register}
+                </div>
+            </div>
+        )
     }
 }
 

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import Fire from './config/Fire';
 
 class SignUpForm extends Component {
     constructor() {
@@ -11,7 +12,7 @@ class SignUpForm extends Component {
             name: '',
             hasAgreed: false
         };
-
+        this.SignUp = this.SignUp.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -33,6 +34,12 @@ class SignUpForm extends Component {
         console.log(this.state);
     }
 
+    SignUp(e){
+      e.preventDefault();
+      firebase.auth().createUserWithEmailAndPassword(this.state.email,this.state.password).catch((error) => {console.log(error)});
+    
+    }
+
     render() {
         return (
         <div className="FormCenter">
@@ -47,7 +54,7 @@ class SignUpForm extends Component {
               </div>
               <div className="FormField">
                 <label className="FormField__Label" htmlFor="password">Confirmar senha</label>
-                <input type="password" id="password" className="FormField__Input" placeholder="Confirmar sua senha" name="password" value={this.state.password} onChange={this.handleChange} />
+                <input type="password" id="password1" className="FormField__Input" placeholder="Confirmar sua senha" name="password" value={this.state.password} onChange={this.handleChange} />
               </div>
               <div className="FormField">
                 <label className="FormField__Label" htmlFor="email">E-Mail Address</label>
