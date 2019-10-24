@@ -1,36 +1,39 @@
-const express = require('express');
-const app = express();
-const bodyParser = require('body-parser');
-const cors = require('cors');
-const mongoose = require('mongoose');
-const indexRoutes = express.Router(); 
-const usuariosRoutes = express.Router(); 
-const dadosRoutes = express.Router();
-const PORT = 4000;
+'use strict'
 
-//carrega os models
-const Usuarios =  require('./models/Model-Usuario');
-const Dados =  require('./models/Model-Dados');
+const app = require('../src/app');
+const http = require('http');
+const debug = require('debug')('GerenciamentoObra:server');
+;
 
 
+const port = normalizePort(process.env.PORT || '3000');
+app.set('port', port);
 
-app.use(cors());
-app.use(bodyParser.json());
+const server =  http.createServer(app);
 
-mongoose.connect('colocar a connection string aqui para conectar com banco', { useNewUrlParser: true });
-const connection = mongoose.connection;
-
-connection.once('open', function() {
-    console.log("MongoDB database connection established successfully");
-}) 
-  
+server.listen(port);
+server.on('listening', onListening);
+console.log('api rodando na porta ' + port);
 
 
+function normalizePort(val){
+    const port = parseInt(val, 10);
 
-app.use('/', indexRoutes);
-app.use('/usuarios', usuariosRoutes);
-app.use('/dados', dadosRoutes);
+    if(isNaN(port)){
+        return val;
+    }
 
-app.listen(PORT, async function() {
-    console.log("Server is running on Port: " + PORT);
-});
+    if (port >= 0){
+        return port;
+    }
+
+    return false;
+}
+
+function onListening(){
+    const addr = server.address();
+    const bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+    debug('Listening on ' + bind);
+}
