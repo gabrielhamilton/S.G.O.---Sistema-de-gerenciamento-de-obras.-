@@ -40,7 +40,7 @@ class CreateMaterials extends Component {
             image:filename,
             progress: 100
         })
-        firebase.storage().ref('avatars').child(filename).getDownloadURL()
+        firebase.storage().ref('materiais').child(filename).getDownloadURL()
         .then(url=>this.setState({
             imageURL:url
         }))
@@ -84,13 +84,13 @@ class CreateMaterials extends Component {
                         <FileUploader
                         accept="images/*"
                         name='images'
-                        storageRef={firebase.storage().ref('avatars')}
+                        storageRef={firebase.storage().ref('materiais')}
                         onUploadStart={this.handleUploadStart}
                         onUploadSuccess={this.handleUploadSuccess}
                         onProgress ={this.handleProgress}
                         />
                         <br/>
-                        <p>{this.state.progress}</p>
+                        <p>{this.state.progress}%</p>
                     </div>
                     <div className="input-field">
                         <button className="btn blue lighten-1 z-depth-0">Adicionar Material</button>

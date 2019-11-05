@@ -2,11 +2,19 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { createProject } from '../../store/actions/projectActions'
 import { Redirect } from 'react-router-dom'
+import FileUploader from 'react-firebase-file-uploader'
+import fbConfig from '../../config/fbConfig'
+import firebase from 'firebase'
+
 
 class CreateProject extends Component {
     state={
      nome:'',
-     descricao:''
+     descricao:'',
+     image:'',
+     imageURL:'',
+     progress: 0,
+     comentarios:''
     }
 
     handleChange = (e) =>{
@@ -19,6 +27,21 @@ class CreateProject extends Component {
         //console.log(this.state);
         this.props.createProject(this.state)
         this.props.history.push('/');
+    }
+    handleUploadSuccess= filename =>{
+        this.setState({
+            image:filename,
+            progress: 100
+        })
+        firebase.storage().ref('projetos').child(filename).getDownloadURL()
+        .then(url=>this.setState({
+            imageURL:url
+        }))
+    }
+    handleProgress = progress =>{
+        this.setState({
+            progress:progress
+        })
     }
     
     render() {
@@ -35,6 +58,22 @@ class CreateProject extends Component {
                     <div className="input-field">
                         <label htmlFor="descricao">Descrição do Projeto</label>
                         <textarea id="descricao" className="materialize-textarea" onChange={this.handleChange}></textarea>
+                    </div>
+                    
+                    <div className="input-field">
+                    <label htmlFor="descricao">Adicinar Documento</label>
+                        <br/>
+                        <br/>
+                        <FileUploader
+                        accept="images/*"
+                        name='images'
+                        storageRef={firebase.storage().ref('projetos')}
+                        onUploadStart={this.handleUploadStart}
+                        onUploadSuccess={this.handleUploadSuccess}
+                        onProgress ={this.handleProgress}
+                        />
+                        <br/>
+                        <p>{this.state.progress}%</p>
                     </div>
                     <div className="input-field">
                         <button className="btn blue lighten-1 z-depth-0">Criar Projeto</button>

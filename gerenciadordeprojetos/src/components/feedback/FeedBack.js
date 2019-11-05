@@ -6,10 +6,9 @@ import { Redirect } from 'react-router-dom'
 import moment from 'moment'
 
 
-
-const ProjectDetails = (props) => {
+const FeedBack = (props) => {
     const { project,auth } = props;
-    if (!auth.uid  ) return <Redirect to ='/signin'/>
+    if (!auth.uid ) return <Redirect to ='/signin'/>
     if (project){
         return (
         <div className="container section project-details">
@@ -46,7 +45,7 @@ const ProjectDetails = (props) => {
 }
 
 const mapSatateToProps = (state, ownProps) =>{
-    //console.log(state);
+    console.log(state);
     const id = ownProps.match.params.id;
     const projects = state.firestore.data.projects;
     const project = projects ? projects[id] : null
@@ -62,4 +61,4 @@ export default compose(
         { collection : 'projects'}
     ])
 
-)(ProjectDetails)
+)(FeedBack)
