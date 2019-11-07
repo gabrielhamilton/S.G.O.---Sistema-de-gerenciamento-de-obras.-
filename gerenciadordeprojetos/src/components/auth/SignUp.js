@@ -46,9 +46,6 @@ class SignUp extends Component {
                         <input type="text" id="lastName" onChange={this.handleChange}/>
                     </div>
                     <div className="input-field">
-                    <input type="checkbox" id="cliente" name="checkbox" value="check"  />
-                    </div>
-                    <div className="input-field">
                         <button className="btn green lighten-1 z-depth-0">Cadastrar</button>
                     <div className='red-text center'>
                         { authError ? <p>{authError}</p> : null }
