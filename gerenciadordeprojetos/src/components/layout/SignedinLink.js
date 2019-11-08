@@ -5,7 +5,7 @@ import { signOut } from '../../store/actions/authActions'
  
 
 const SignedinLink = (props) => {
-    if(props.profile.cliente == true){
+    if(props.profile.cliente == 'sim'){
         return (
             <ul className="right">
                 <li><NavLink to='/feedback'>Deixe seu feedBack</NavLink></li>

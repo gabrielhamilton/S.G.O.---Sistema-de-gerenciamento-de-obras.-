@@ -59,7 +59,6 @@ class CreateProject extends Component {
                         <label htmlFor="descricao">Descrição do Projeto</label>
                         <textarea id="descricao" className="materialize-textarea" onChange={this.handleChange}></textarea>
                     </div>
-                    
                     <div className="input-field">
                     <label htmlFor="descricao">Adicinar Documento</label>
                         <br/>
@@ -75,6 +74,11 @@ class CreateProject extends Component {
                         <br/>
                         <p>{this.state.progress}%</p>
                     </div>
+                    <div className="input-field">
+                        <label htmlFor="comentarios">Adicionar Comentarios</label>
+                        <textarea id="comentarios" className="materialize-textarea" onChange={this.handleChange}></textarea>
+                    </div>
+                    
                     <div className="input-field">
                         <button className="btn blue lighten-1 z-depth-0">Criar Projeto</button>
                     </div>

@@ -9,7 +9,7 @@ class SignUp extends Component {
      password:'',
      firstName:'',
      lastName:'',
-     cliente: Boolean
+     cliente:''
     }
 
     handleChange = (e) =>{
@@ -44,6 +44,10 @@ class SignUp extends Component {
                     <div className="input-field">
                         <label htmlFor="lastName">Sobrenome</label>
                         <input type="text" id="lastName" onChange={this.handleChange}/>
+                    </div>
+                    <div className="input-field">
+                        <label htmlFor="cliente">É cliente ? </label>
+                        <input type="text" id="cliente" onChange={this.handleChange}/>
                     </div>
                     <div className="input-field">
                         <button className="btn green lighten-1 z-depth-0">Cadastrar</button>
