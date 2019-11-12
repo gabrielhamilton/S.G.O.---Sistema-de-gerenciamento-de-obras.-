@@ -25,7 +25,7 @@ const ProjectDetails = (props) => {
                 </div>
                 <div className="card content">
                     <span className="card-title">Comentários</span>
-                    <p>"{project.comentarios}"</p>
+                    <p>{project.comentarios}</p>
                 </div>
                 <div className="card-action grey lighten-4 grey-text">
                     <div>Criado por {project.authorFirstName} {project.authorLastName}</div>

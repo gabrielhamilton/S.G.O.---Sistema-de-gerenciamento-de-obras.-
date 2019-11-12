@@ -1,62 +1,40 @@
 import React, { Component } from 'react'
+import FeedBackList from './FeedBackList'
 import { connect } from 'react-redux'
-import { createProject } from '../../store/actions/projectActions'
+import { firestoreConnect } from 'react-redux-firebase'
+import { compose } from 'redux'
 import { Redirect } from 'react-router-dom'
 
 
-class CreateProject extends Component {
-    state={
-     nome:'',
-     descricao:'',
-     image:'',
-     imageURL:'',
-     progress: 0,
-     comentarios:''
-    }
 
-    handleChange = (e) =>{
-        this.setState({
-            [e.target.id]: e.target.value
-        })
-    }
-    handleSubmit = (e) =>{
-        e.preventDefault();
-        //console.log(this.state);
-        this.props.createProject(this.state)
-        this.props.history.push('/');
-    }
+class Dashboard extends Component {
+  render() {
+    const { projects, auth } = this.props;
+    if (!auth.uid) return <Redirect to='/signin' /> 
 
-    
-    render() {
-        const { auth } = this.props;
-        if (!auth.uid ) return <Redirect to ='/signin'/>
-        return (
-            <div className="Container">
-                <form onSubmit={this.handleSubmit} className="white">        
-                    <div className="input-field">
-                        <label htmlFor="comentarios">Adicionar Comentarios</label>
-                        <textarea id="comentarios" className="materialize-textarea" onChange={this.handleChange}></textarea>
-                    </div>
-                    
-                    <div className="input-field">
-                        <button className="btn blue lighten-1 z-depth-0">Publicar comentario</button>
-                    </div>
-                </form>
-            </div>
-        )
-    }
+    return (
+      <div className="dashboard container">
+        <div className="row">
+          <div className="col s12 m12">
+            <FeedBackList projects={projects} />
+          </div>
+        </div>
+      </div>
+    )
+  }
 }
 
 const mapStateToProps = (state) => {
-    return {
-        auth: state.firebase.auth
-    }
+  // console.log(state);
+  return {
+    projects: state.firestore.ordered.projects,
+    auth: state.firebase.auth
+  }
 }
 
-const mapDispatchToProps = (dispatch) =>{
-    return {
-        createProject:(project) => dispatch(createProject(project))
-    }
-}
-
-export default connect(mapStateToProps,mapDispatchToProps)(CreateProject)
+export default compose(
+  connect(mapStateToProps),
+  firestoreConnect([
+    { collection: 'projects' }
+  ])
+)(Dashboard)

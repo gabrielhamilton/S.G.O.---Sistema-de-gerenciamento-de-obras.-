@@ -9,7 +9,8 @@ class SignUp extends Component {
      password:'',
      firstName:'',
      lastName:'',
-     cliente:''
+     cliente:'',
+     comentarios: ''
     }
 
     handleChange = (e) =>{
