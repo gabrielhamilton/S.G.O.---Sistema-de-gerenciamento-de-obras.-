@@ -7,7 +7,7 @@ import moment from 'moment'
 
 const MaterialsDetails = (props) => {
     const { material,auth } = props;
-    if (!auth.uid ) return <Redirect to ='/signin'/>
+    if (!auth.uid  ) return <Redirect to ='/signin'/>
     if (material){
         return (
         <div className="container section material-details">
@@ -17,7 +17,9 @@ const MaterialsDetails = (props) => {
                     <p>{ material.descricao }</p>
                 </div>
                 <div className="card content">
-                    <p>{ material.quantidade }</p>
+                    <span className="card-title">Documentos Fixados</span>
+                     <br/>
+                     <a href={material.imageURL}>Download</a>
                 </div>
                 <div className="card-action grey lighten-4 grey-text">
                     <div>Criado por {material.authorFirstName} {material.authorLastName}</div>
@@ -29,7 +31,7 @@ const MaterialsDetails = (props) => {
     } else {
         
         return (
-            <div className="container right">
+            <div className="container center">
                 <p>Carregando Materiais...</p>
             </div>
         )

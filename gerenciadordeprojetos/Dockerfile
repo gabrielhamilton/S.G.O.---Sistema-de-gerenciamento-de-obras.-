@@ -3,13 +3,13 @@ FROM node
 
 # set working directory 
 
-RUN mkdir /gerenciadordeprojetos/src/app
+RUN mkdir /home/gabriel_apolinario/Documentos/S.G.O.---Sistema-de-gerenciamento-de-obras.-/gerenciadordeprojetos/src/app
 
-COPY . /gerenciadordeprojetos/src/app
+COPY . /home/gabriel_apolinario/Documentos/S.G.O.---Sistema-de-gerenciamento-de-obras.-/gerenciadordeprojetos/src/app
 
-WORKDIR /gerenciadordeprojetos/src/app
+WORKDIR /home/gabriel_apolinario/Documentos/S.G.O.---Sistema-de-gerenciamento-de-obras.-/gerenciadordeprojetos/src/app
 
-ENV PATH /gerenciadordeprojetos/src/app/node_modules/.bin:$PATH
+ENV PATH /home/gabriel_apolinario/Documentos/S.G.O.---Sistema-de-gerenciamento-de-obras.-/gerenciadordeprojetos/src/app/node_modules/.bin:$PATH
 
 RUN yarn
 
