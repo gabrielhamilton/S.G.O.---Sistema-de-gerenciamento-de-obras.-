@@ -18,8 +18,9 @@ const SignedinLink = (props) => {
     }else  
     return (
         <ul className="right">
+            <li><NavLink to='/createcliente'>Novo Cliente</NavLink></li>
             <li><NavLink to='/createproject'>Novo Projeto</NavLink></li>
-            <li><NavLink to='/creatematerials'>Materiais</NavLink></li>
+            <li><NavLink to='/creatematerials'>Novo Material</NavLink></li>
             <li><a onClick={props.signOut}>Sair</a></li>
             <li><NavLink to='/' className='bnt bnt-floating blue lighten-1'>
             {props.profile.initials}

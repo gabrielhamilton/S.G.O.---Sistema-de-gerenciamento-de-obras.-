@@ -16,17 +16,9 @@ const ProjectDetails = (props) => {
                     <span className="card-title">{project.nome}</span>
                     <p>{ project.descricao }</p>
                 </div>
-                <div className="card content">
-                    <span className="card-title">Documentos Fixados</span>
-                     <br/>
-                     <a href={project.imageURL}>Download</a>
-                </div>
-                <div className="card content">
-                    <span className="card-title">Comentários</span>
-                    <p>"{project.comentarios}"</p>
-                </div>
                 <div>
                    <button  className="btn green lighten-2 z-depth-0" >Editar</button>
+                   <button  className="btn red lighten-2 z-depth-0" >Deletar</button>
                 </div>
                 <div className="card-action grey lighten-4 grey-text">
                     <div>Criado por {project.authorFirstName} {project.authorLastName}</div>
@@ -39,7 +31,7 @@ const ProjectDetails = (props) => {
         
         return (
             <div className="container center">
-                <p>Carregando projetos...</p>
+                <p>Carregando Clientes...</p>
             </div>
         )
     }
@@ -57,5 +49,10 @@ const mapSatateToProps = (state, ownProps) =>{
     }
 }
 
+export default compose(
+    connect(mapSatateToProps),
+    firestoreConnect([
+        { collection : 'projects'}
+    ])
 
-export default compose(connect(mapSatateToProps),firestoreConnect([{ collection : 'projects'}]))(ProjectDetails)
+)(ProjectDetails)

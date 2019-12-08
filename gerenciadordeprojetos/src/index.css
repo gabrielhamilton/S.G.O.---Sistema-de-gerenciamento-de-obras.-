@@ -6,11 +6,11 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  background: url(/img/construction-1217562-1280x960.jpg);
+  background: url(/img/construction-1217562-1280x960.jpg) no-repeat;
   background-size: 100%;
   background-position: bottom;
   background-color: #95e8f3;
-  min-height: 50%;
+  min-height: 100%;
   
 }
 

@@ -10,7 +10,7 @@ const projectReducer = (state = initState, action) => {
             console.log('crete project error', action.err);
             return state;
         case 'CREATE_MATERIAL':
-                console.log('created material', action.project);
+                console.log('created material', action.material);
                 return state;
         case 'CRETE_MATERIAL_ERROR':
                 console.log('crete material error', action.err);

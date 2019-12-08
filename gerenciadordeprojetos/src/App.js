@@ -8,6 +8,7 @@ import Signup from './components/auth/SignUp'
 import CreateProject from './components/projects/CreateProject'
 import CreateMaterials from './components/materials/CreateMaterials'
 import FeedBack from './components/feedback/FeedBack'
+import CreateCliente from './components/clientes/CreateCliente'
 
 class App extends Component{
   render(){
@@ -23,6 +24,7 @@ class App extends Component{
           <Route path='/createproject' component={CreateProject}/>
           <Route path='/creatematerials' component={CreateMaterials}/>
           <Route path='/feedback' component={FeedBack}/>
+          <Route path='/createcliente' component={CreateCliente}/>
         </Switch>
       </div>
     </BrowserRouter>

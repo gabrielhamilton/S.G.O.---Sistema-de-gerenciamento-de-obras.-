@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import {createMaterials} from '../../store/actions/projectActions'
+import {createMaterials} from '../../store/actions/materialActions'
 import { Redirect,Link } from 'react-router-dom'
 import MaterialsSummary from './MaterialsSummary'
 import FileUploader from 'react-firebase-file-uploader'

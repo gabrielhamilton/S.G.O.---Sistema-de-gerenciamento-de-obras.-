@@ -21,6 +21,9 @@ const MaterialsDetails = (props) => {
                      <br/>
                      <a href={material.imageURL}>Download</a>
                 </div>
+                <div>
+                   <button  className="btn green lighten-2 z-depth-0" >Editar</button>
+                </div>
                 <div className="card-action grey lighten-4 grey-text">
                     <div>Criado por {material.authorFirstName} {material.authorLastName}</div>
                     <div>{moment(material.createdAt.toDate()).calendar()}</div>
@@ -50,10 +53,5 @@ const mapSatateToProps = (state, ownProps) =>{
     }
 }
 
-export default compose(
-    connect(mapSatateToProps),
-    firestoreConnect([
-        { collection : 'materials'}
-    ])
 
-)(MaterialsDetails)
+export default compose(connect(mapSatateToProps),firestoreConnect([{ collection : 'materials'}]))(MaterialsDetails)

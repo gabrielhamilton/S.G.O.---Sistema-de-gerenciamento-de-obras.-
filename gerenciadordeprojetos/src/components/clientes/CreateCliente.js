@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { signUp } from '../../store/actions/authActions'
 
-class SignUp extends Component {
+class CreateCliente extends Component {
     state={
      email:'',
      password:'',
@@ -20,15 +20,16 @@ class SignUp extends Component {
     handleSubmit = (e) =>{
         e.preventDefault();
         this.props.signUp(this.state)
+        this.props.history.push('/');
     }
     
     render() {
         const { auth, authError } = this.props;
-        if (auth.uid ) return <Redirect to ='/'/>
+        if ( !auth.uid ) return <Redirect to ='/signin'/>
         return (
             <div className="Container">
                 <form onSubmit={this.handleSubmit} className="white">
-                    <h5 className="grey-text text-darken-3">Cadastro</h5>
+                    <h5 className="grey-text text-darken-3">Cadastro Cliente</h5>
                     <div className="input-field">
                         <label htmlFor="email">Email</label>
                         <input type="email" id="email" onChange={this.handleChange}/>
@@ -46,7 +47,11 @@ class SignUp extends Component {
                         <input type="text" id="lastName" onChange={this.handleChange}/>
                     </div>
                     <div className="input-field">
-                        <button className="btn green lighten-1 z-depth-0">Cadastrar</button>
+                        <label htmlFor="cliente">É cliente ? </label>
+                        <input type="text" id="cliente" onChange={this.handleChange}/>
+                    </div>
+                    <div className="input-field">
+                        <button className="btn green lighten-1 z-depth-0">Cadastrar Cliente</button>
                     <div className='red-text center'>
                         { authError ? <p>{authError}</p> : null }
                     </div>
@@ -70,4 +75,4 @@ const mapDispatchToProps = (dispatch)=>{
     }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(SignUp)
+export default connect(mapStateToProps,mapDispatchToProps)(CreateCliente)
