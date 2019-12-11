@@ -52,4 +52,10 @@ Registro fotográfico: Para cada etapa do cronograma citado no item anterior, o 
 Orçamento: será dividido em etapas de acordo com o cronograma, o engenheiro fará o orçamento e apenas ele pode editar os gastos programados, mas pode escolher quem terá acesso à estas informações e quem pode informar o quanto foi gasto por etapa, para poder ser comparado com o planejado. 
 O gráfico de percentual concluído da obra será formado de acordo com as confirmações dos itens concluídos pelo executor.
  
+Histórias de Usuários: 
+
+Como engenheiro contratado para obra, devo fazer meu cadastro no sistema com o objetivo de poder adicionar planilhas, visualizar os materiais da obra, enviar pdf e também fazer a avaliação da obra.
+
+Como cliente da obra, poderei fazer meu cadastro e também poderei fazer o acompanhamento da obra, visualizar os arquivos como fotos e pdf e por fim poderei dar meu feedback.
+
 
